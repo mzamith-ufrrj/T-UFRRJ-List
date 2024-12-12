@@ -9,8 +9,8 @@
 #  versão de on-ramp
 #
 ################################################################################
-EXEFILE      = ../TModelCA++
-LIBFILE      = ../libTModelCA++.so
+EXEFILE      = ../TModelCA++.exec
+#LIBFILE      = ../libTModelCA++.so
 APPLICATION  = -D_APPLICATION=\"$(EXEFILE)\"
 #CPUCC       = /opt/intel/bin/icpc
 #CPUCC       = g++ #/opt/gnu-gcc/bin/g++
@@ -78,7 +78,7 @@ Statistic:
 	$(CPU_COMPILE) -c Statistic.cpp -o obj/Statistic.o
 
 clean:
-	rm obj/*.o
+	rm obj/*.o; rm *.txt; rm *.dat; rm obj/*.o; rm $(EXEFILE)
 
-files:
-	rm *.txt; rm *.dat; rm obj/*.o
+
+	

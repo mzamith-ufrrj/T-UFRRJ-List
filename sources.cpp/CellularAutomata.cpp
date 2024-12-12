@@ -23,16 +23,17 @@ using namespace std;
  */
 CellularAutomata::CellularAutomata():
 mRules(NULL),
-mConfigure(NULL)
+mConfigure(NULL),
+mVerbose(false)
 {
-    cout << "\nStarting simulation" << endl;
+   
 }
 
 /*
  *
  */
 CellularAutomata::~CellularAutomata(){
-    cout << "\nFinalizing simulation" << endl;
+    
 
 
     if (mRules != NULL){
@@ -84,15 +85,18 @@ void CellularAutomata::init(Configure *configure)
 	//if (mRules != NULL) delete mRules;
 	//mRules = NULL;
     if (mConfigure->mTypeModel == Configure::SINGLE_LANE){
-        cout << "\tModel: SINGLE_LANE" << endl;
+        if (mVerbose)
+            cout << "\tModel: SINGLE_LANE" << endl;
         mRules = make_shared<TModel>();
         //mRules = new TModel();
     }else if (mConfigure->mTypeModel == Configure::MULTI_LANE_SYM){
-        cout << "\tModel: MULTI_LANE_SYM" << endl;
+        if (mVerbose)
+            cout << "\tModel: MULTI_LANE_SYM" << endl;
         mRules = make_shared<TModel_ML_SYM>();
         //mRules = new TModel_ML_SYM();
     }else if (mConfigure->mTypeModel == Configure::MULTI_LANE_ASYM){
-        cout << "\tModel: MULTI_LANE_ASYM" << endl;
+        if (mVerbose)
+            cout << "\tModel: MULTI_LANE_ASYM" << endl;
         
         //mRules = new TModel_ML_ASYM();
         mRules = make_shared<TModel_ML_ASYM>();
@@ -149,30 +153,16 @@ void CellularAutomata::exec(void){
 
     if (mpStep == 0) mpStep = 1;
 
-    cout << "\t  InitialCondition (" << mConfigure->mDensity << ") |";
     
-    auto start_time = std::chrono::high_resolution_clock::now();
-        mRules->initialCondition(mConfigure->mDensity);
-    auto stop_time = std::chrono::high_resolution_clock::now();
-    std::chrono::duration<double> total_time = stop_time - start_time;
-    cout << " Elapsed time: " << total_time.count() << endl;
-    cout.flush();
-    //if (mRules->mConfigure->mRoadBlock) mRules->addONEObstables();
-
+    mRules->initialCondition(mConfigure->mDensity);
     mRules->mSensor->clear();
-
     mRules->mSensor->setAverageSpeed(mConfigure->mVMax);
-
-    cout << "\t  Update (t = 0)         |" ;
-    
-    start_time = std::chrono::high_resolution_clock::now();
     mRules->update(0, false, true);// update(0, dGlobal);
-    stop_time = std::chrono::high_resolution_clock::now();
-    total_time = stop_time - start_time;
-    cout << " Elapsed time: " << total_time.count() << endl;
     
-    cout << "\t Starting simulation" << endl;
-    cout.flush();
+    if (mVerbose){
+        cout << "\t-Starting simulation-" << endl;
+        cout.flush();
+    }
     cout << "D(" << fixed << setw(4) << mConfigure->mDensity << ") ";
     for (int step = 1; step < mConfigure->mSTime; step++){
     	if ((step % mpStep) == 0){
@@ -194,8 +184,11 @@ void CellularAutomata::exec(void){
 
     mRules->finalCondition();
     auto stop_time_s = std::chrono::high_resolution_clock::now();
-    total_time = stop_time_s - start_time_s;
-    cout << endl << "\t\tTotal simulation:" << total_time.count() << endl;
+    std::chrono::duration<double> total_time = stop_time_s - start_time_s;
+    if (mVerbose)
+        cout << "\t\tTotal simulation: " << fixed << setprecision(2) << total_time.count() << " seconds" << endl;
+    else 
+        cout << endl;
     
 
 };

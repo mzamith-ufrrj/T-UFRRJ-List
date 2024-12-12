@@ -7,7 +7,7 @@ if [ ! -d "$DIR" ]; then
 fi
 x=1
 VAR=""
-CONFIG="SL-Slower.xml"
+CONFIG="SL-Slower.json"
 INCLUSTER="cluster.adjusted.SL-SLOW-HR-1.5-0.*"
 INFIXED="statistic.fixed.SL-SLOW-HR-1.5-0.*"
 INPHOTO="statistic.photo.SL-SLOW-HR-1.5-0.*"
@@ -19,7 +19,7 @@ do
   VAR+="${x} "
   x=$(( $x + 1 ))
 done
-parallel ./exec-CA-lib-v2.0.py ::: $CONFIG ::: $VAR
+parallel ./TModelCA++.exec ::: $CONFIG ::: $VAR
 cat $INCLUSTER > $OUTCLUSTER
 cat $INFIXED > $OUTFIXED
 cat $INPHOTO > $OUTPHOTO

@@ -1,21 +1,28 @@
 #!/usr/bin/bash
+DIR=$(date +%Y%m%d-%H%M%S)
+DIR="test.$DIR"
+if [ ! -d "$DIR" ]; then
+  mkdir $DIR
+fi
 x=1
 VAR=""
-CONFIG="MLS-Default.xml"
-INCLUSTER="cluster.adjusted.MLS-STANDARD-HR-1.5-0.*"
-INFIXED="statistic.fixed.MLS-STANDARD-HR-1.5-0.*"
-INPHOTO="statistic.photo.MLS-STANDARD-HR-1.5-0.*"
-OUTCLUSTER="CA.MLS-STANDARD-HR-1.5-0.csv"
-OUTFIXED="SF.MLS-STANDARD-HR-1.5-0.csv"
-OUTPHOTO="SP.MLS-STANDARD-HR-1.5-0.csv"
+CONFIG="MLS-2-Default.json"
+INCLUSTER="cluster.adjusted.MLS-2-STANDARD-HR-1.5-0.*"
+INFIXED="statistic.fixed.MLS-2-STANDARD-HR-1.5-0.*"
+INPHOTO="statistic.photo.MLS-2-STANDARD-HR-1.5-0.*"
+OUTCLUSTER="CA.MLS-2-STANDARD-HR-1.5-0.csv"
+OUTFIXED="SF.MLS-2-STANDARD-HR-1.5-0.csv"
+OUTPHOTO="SP.MLS-2-STANDARD-HR-1.5-0.csv"
 while [ $x -le 95 ]
 do
   VAR+="${x} "
   x=$(( $x + 1 ))
 done
-parallel ./exec-CA-lib-v2.0.py ::: $CONFIG ::: $VAR
+parallel ./TModelCA++.exec ::: $CONFIG ::: $VAR
 cat $INCLUSTER > $OUTCLUSTER
 cat $INFIXED > $OUTFIXED
 cat $INPHOTO > $OUTPHOTO
-rm -rf $INCLUSTER $INFIXED $INPHOTO
+mv  $INCLUSTER $DIR
+mv  $INFIXED  $DIR
+mv  $INPHOTO $DIR
 echo 'End the game!'

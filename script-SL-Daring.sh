@@ -1,11 +1,12 @@
 #!/usr/bin/bash
 DIR=$(date +%Y%m%d-%H%M%S)
+DIR="test.$DIR"
 if [ ! -d "$DIR" ]; then
   mkdir $DIR
 fi
 x=1
 VAR=""
-CONFIG="SL-Daring.xml"
+CONFIG="SL-Daring.json"
 INCLUSTER="cluster.adjusted.SL-DARING-HR-1.5-0.*"
 INFIXED="statistic.fixed.SL-DARING-HR-1.5-0.*"
 INPHOTO="statistic.photo.SL-DARING-HR-1.5-0.*"
@@ -17,7 +18,7 @@ do
   VAR+="${x} "
   x=$(( $x + 1 ))
 done
-parallel ./exec-CA-lib-v2.0.py ::: $CONFIG ::: $VAR
+parallel ./TModelCA++.exec ::: $CONFIG ::: $VAR
 cat $INCLUSTER > $OUTCLUSTER
 cat $INFIXED > $OUTFIXED
 cat $INPHOTO > $OUTPHOTO

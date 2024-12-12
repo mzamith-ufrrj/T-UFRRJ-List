@@ -6,13 +6,13 @@ if [ ! -d "$DIR" ]; then
 fi
 x=1
 VAR=""
-CONFIG="MLA-2-Default.json"
-INCLUSTER="cluster.adjusted.MLA-2-STANDARD-HR-1.5-0.*"
-INFIXED="statistic.fixed.MLA-2-STANDARD-HR-1.5-0.*"
-INPHOTO="statistic.photo.MLA-2-STANDARD-HR-1.5-0.*"
-OUTCLUSTER="CA.MLA-2-STANDARD-HR-1.5-0.csv"
-OUTFIXED="SF.MLA-2-STANDARD-HR-1.5-0.csv"
-OUTPHOTO="SP.MLA-2-STANDARD-HR-1.5-0.csv"
+CONFIG="MLA-4-Default.json"
+INCLUSTER="cluster.adjusted.MLA-4-STANDARD-HR-1.5-0.*"
+INFIXED="statistic.fixed.MLA-4-STANDARD-HR-1.5-0.*"
+INPHOTO="statistic.photo.MLA-4-STANDARD-HR-1.5-0.*"
+OUTCLUSTER="CA.MLA-4-STANDARD-HR-1.5-0.csv"
+OUTFIXED="SF.MLA-4-STANDARD-HR-1.5-0.csv"
+OUTPHOTO="SP.MLA-4-STANDARD-HR-1.5-0.csv"
 while [ $x -le 95 ]
 do
   VAR+="${x} "

@@ -38,12 +38,16 @@ public:
     void help(void);
     void init(Configure *);
     void exec(void);
-
+    void setVerbose(void) { mVerbose = true; };
     void finalize(void);
+
 
 	shared_ptr<Grid>                   mGrid;
 	shared_ptr<MovementSensor>         mSensor;
     shared_ptr<TModel>                 mRules;
     shared_ptr<Configure>              mConfigure;
+
+    private:
+        bool mVerbose;
 };
 #endif
