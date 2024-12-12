@@ -1,0 +1,16 @@
+<config>
+    <params>
+        <global-params name="SL-STANDARD-HR-1.5" max-speed="25"
+                       cellX="1000" cellY="1"
+                       size="1.5" default-size="7.5"
+                       time-steps="11800" transiente-steps="1000" statistic-steps="120" type-model="1"
+                       photo="1" fixed="1" logCluster="1" log="0"
+                       deceleration="3" time-perception="12.0"
+                       road-block="0" last-log-vehicles="-1"
+        />
+        <profile name="STANDARD" occ="1.0" betaA-acc="5" betaB-acc="7" inc="5" desc="1" size="5" max-speed="25" aheadway="6" safedist="3" left-p="1.0" right-p="1.0"></profile>
+        <!-- <profile name="DARING NOVO" occ="1.0" betaA-acc="8" betaB-acc="7" inc="5" desc="1" size="5" max-speed="25" left-p="1.0" right-p="1.0"></profile> -->
+        <!-- <profile name="DARING" occ="1.0" betaA-acc="3" betaB-acc="4" inc="5" desc="1" size="5" max-speed="25" left-p="1.0" right-p="1.0"></profile>
+        <profile name="STANDARD" occ="1.0" betaA-acc="5" betaB-acc="3" inc="5" desc="1" size="5" max-speed="25" left-p="1.0" right-p="1.0"></profile> -->
+    </params>
+</config>
